@@ -31,10 +31,14 @@ public class Employee {
     @Column(name = "profile_image")
     private String profileImage;
 
-    public Employee(String firstName, String lastName, String email, String username) {
+    @Column(nullable = false)
+    private String password;
+
+    public Employee(String firstName, String lastName, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
+        this.password = password;
     }
 }

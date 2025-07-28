@@ -36,7 +36,7 @@ public class EmployeesService {
             throw new BadRequestException("This username * " + employee.getUsername() + " * is already in use.");
         });
 
-        Employee newEmployee = new Employee(payload.firstName(), payload.lastName(), payload.email(), payload.username());
+        Employee newEmployee = new Employee(payload.firstName(), payload.lastName(), payload.email(), payload.username(), payload.password());
         newEmployee.setProfileImage("https://ui-avatars.com/api/?name=" + payload.firstName() + "+" + payload.lastName());
         this.employeesRepository.save(newEmployee);
         return newEmployee;
@@ -48,6 +48,10 @@ public class EmployeesService {
 
     public Employee findById(long employeeId) {
         return this.employeesRepository.findById(employeeId).orElseThrow(() -> new NotFoundException(employeeId));
+    }
+
+    public Employee findByEmail(String email){
+        return this.employeesRepository.findByEmail(email).orElseThrow(() -> new NotFoundException(email));
     }
 
     public Employee findByIdAndUpdate(long employeeId, NewEmployeeDTO payload) {
